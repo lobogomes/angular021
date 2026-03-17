@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',

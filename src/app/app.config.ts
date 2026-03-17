@@ -4,7 +4,7 @@ import {provideRouter} from '@angular/router';
 import {providePrimeNG} from 'primeng/config';
 
 import {routes} from './app.routes';
-import {AppPreset} from './core/theme/preset';
+import {AppPreset} from '@core/theme/preset';
 
 export const appConfig: ApplicationConfig = {
   providers: [

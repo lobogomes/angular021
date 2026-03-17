@@ -1,30 +1,30 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageModule } from 'primeng/message';
-import { PasswordModule } from 'primeng/password';
-import { LoginCredentials } from '../../../core/auth/user.model';
-import { form, FormField } from '@angular/forms/signals';
-import { AuthService } from '../../../core/auth/auth.service';
+import { LoginCredentials } from '@core/auth/user.model';
+import { email, form, FormField, minLength, required } from '@angular/forms/signals';
+import { AuthService } from '@core/auth/auth.service';
 import { Router } from '@angular/router';
 import { Fluid } from 'primeng/fluid';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Card } from 'primeng/card';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
     InputTextModule,
-    PasswordModule,
     ButtonModule,
-    MessageModule,
     Fluid,
     FormField,
     FloatLabel,
     Card,
+    Tooltip,
   ],
+  // use On.Push, see https://angular.dev/
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.html',
 })
 export class LoginComponent {
@@ -37,12 +37,12 @@ export class LoginComponent {
 
   form = form(this.credentials, (paths) => {
     // doc validation signal forms -> https://angular.dev/guide/forms/signals/validation
-    // required(paths.email, {message: 'Preencha o email'});
-    // email(paths.email, {message: 'E-mail inválido'});
-    // required(paths.password, { message: 'Preencha a senha' });
-    // minLength(paths.password, 8, {
-    //   message: 'A senha deve conter no mínimo 8 caracteres.',
-    // });
+    required(paths.email, { message: 'Preencha o email' });
+    email(paths.email, { message: 'E-mail inválido' });
+    required(paths.password, { message: 'Preencha a senha' });
+    minLength(paths.password, 8, {
+      message: 'A senha deve conter no mínimo 8 caracteres',
+    });
   });
 
   private readonly authService = inject(AuthService);

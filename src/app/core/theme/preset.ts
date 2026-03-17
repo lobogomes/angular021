@@ -17,6 +17,22 @@ import Aura from '@primeuix/themes/aura';
  */
 export const AppPreset = definePreset(Aura, {
   // ─────────────────────────────────────────────────────────────
+  // 0. GLOBAL CSS — usa dt() para referenciar tokens do tema
+  // ─────────────────────────────────────────────────────────────
+  css: `
+    .tooltip-light .p-tooltip-text {
+      background: dt('primary.100');
+      color: dt('primary.800');
+      border: 1px solid dt('surface.200');
+    }
+
+    .tooltip-light.p-tooltip-right  .p-tooltip-arrow { border-right-color:  dt('primary.100'); }
+    .tooltip-light.p-tooltip-left   .p-tooltip-arrow { border-left-color:   dt('primary.100'); }
+    .tooltip-light.p-tooltip-top    .p-tooltip-arrow { border-top-color:    dt('primary.100'); border-bottom-color: dt('primary.100'); }
+    .tooltip-light.p-tooltip-bottom .p-tooltip-arrow { border-bottom-color: dt('primary.100'); border-top-color:    dt('primary.100'); }
+  `,
+
+  // ─────────────────────────────────────────────────────────────
   // 1. PRIMITIVE
   // ─────────────────────────────────────────────────────────────
   primitive: {
@@ -447,6 +463,23 @@ export const AppPreset = definePreset(Aura, {
       danger: {
         background: '{terra.500}',
         color: '#ffffff',
+      },
+    },
+
+    tooltip: {
+      colorScheme: {
+        light: {
+          root: {
+            background: '{primary.700}',
+            color: '{primary.50}',
+          },
+        },
+        dark: {
+          root: {
+            background: '{warmstone.700}',
+            color: '{warmstone.50}',
+          },
+        },
       },
     },
 
