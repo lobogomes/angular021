@@ -2,9 +2,9 @@ import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/co
 import {provideHttpClient} from '@angular/common/http';
 import {provideRouter} from '@angular/router';
 import {providePrimeNG} from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
 
 import {routes} from './app.routes';
+import {AppPreset} from './core/theme/preset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,11 +13,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: AppPreset,
         options: {
           darkModeSelector: '.dark-theme',
-        }
-      }
-    })
-  ]
+        },
+      },
+    }),
+  ],
 };
