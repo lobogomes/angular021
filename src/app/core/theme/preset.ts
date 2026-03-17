@@ -20,6 +20,18 @@ export const AppPreset = definePreset(Aura, {
   // 0. GLOBAL CSS — usa dt() para referenciar tokens do tema
   // ─────────────────────────────────────────────────────────────
   css: `
+    .p-inputtext.p-invalid:not(.sf-touched) {
+      border-color: dt('inputtext.border.color');
+    }
+
+    .p-inputtext.p-invalid:not(.sf-touched)::placeholder {
+      color: dt('inputtext.placeholder.color');
+    }
+
+    .p-floatlabel:has(.p-invalid:not(.sf-touched)) label {
+      color: dt('floatlabel.color');
+    }
+
     .tooltip-light .p-tooltip-text {
       background: dt('primary.100');
       color: dt('primary.800');
@@ -224,52 +236,54 @@ export const AppPreset = definePreset(Aura, {
 
       // ── DARK ─────────────────────────────────────────────────
       dark: {
+        // Primária âmbar — mais quente e luminosa sobre fundos escuros
         primary: {
-          color: '{primary.300}',
-          contrastColor: '{surface.950}',
-          hoverColor: '{primary.200}',
-          activeColor: '{primary.100}',
+          color: '{amber.400}',
+          contrastColor: '{warmstone.950}',
+          hoverColor: '{amber.300}',
+          activeColor: '{amber.200}',
         },
 
+        // Superfícies invertidas: 0 = mais escuro (fundo), 950 = mais claro (texto)
         surface: {
-          0: '#ffffff',
-          50: '{warmstone.50}',
-          100: '{warmstone.100}',
-          200: '{warmstone.200}',
-          300: '{warmstone.300}',
-          400: '{warmstone.400}',
-          500: '{warmstone.500}',
-          600: '{warmstone.600}',
-          700: '{warmstone.700}',
-          800: '{warmstone.800}',
-          900: '{warmstone.900}',
-          950: '{warmstone.950}',
+          0: '{brand.950}',
+          50: '{brand.900}',
+          100: '{brand.900}',
+          200: '{warmstone.700}',
+          300: '{warmstone.600}',
+          400: '{warmstone.500}',
+          500: '{warmstone.400}',
+          600: '{warmstone.300}',
+          700: '{warmstone.200}',
+          800: '{warmstone.100}',
+          900: '{warmstone.50}',
+          950: '#ffffff',
         },
 
         highlight: {
-          background: 'color-mix(in srgb, {primary.400}, transparent 82%)',
-          focusBackground: 'color-mix(in srgb, {primary.400}, transparent 72%)',
-          color: '{primary.200}',
-          focusColor: '{primary.100}',
+          background: 'color-mix(in srgb, {amber.400}, transparent 82%)',
+          focusBackground: 'color-mix(in srgb, {amber.400}, transparent 72%)',
+          color: '{amber.200}',
+          focusColor: '{amber.100}',
         },
 
         formField: {
-          background: '{surface.900}',
-          borderColor: '{surface.700}',
-          hoverBorderColor: '{surface.600}',
-          focusBorderColor: '{primary.400}',
-          color: '{surface.100}',
-          placeholderColor: '{surface.500}',
-          floatLabelColor: '{surface.400}',
-          floatLabelFocusColor: '{primary.300}',
-          floatLabelActiveColor: '{surface.300}',
+          background: '{surface.50}',
+          borderColor: '{surface.200}',
+          hoverBorderColor: '{surface.300}',
+          focusBorderColor: '{amber.400}',
+          color: '{surface.900}',
+          placeholderColor: '{surface.400}',
+          floatLabelColor: '{surface.500}',
+          floatLabelFocusColor: '{amber.400}',
+          floatLabelActiveColor: '{surface.600}',
         },
 
         text: {
-          color: '{surface.100}',
-          hoverColor: '{surface.50}',
-          mutedColor: '{surface.400}',
-          hoverMutedColor: '{surface.300}',
+          color: '{surface.900}',
+          hoverColor: '{surface.950}',
+          mutedColor: '{surface.500}',
+          hoverMutedColor: '{surface.600}',
         },
 
         content: {

@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginCredentials, User } from './user.model';
 
@@ -11,6 +11,16 @@ export class AuthService {
   readonly user = this._currentUser.asReadonly();
   readonly isAuthenticated = computed(() => !!this._currentUser());
 
+  // REMOVE THIS
+  constructor() {
+    this._currentUser.set({
+      id: '1',
+      name: 'Amanda',
+      email: 'amanda@cat.com',
+      username: 'frutinha',
+    });
+  }
+
   login(credentials: LoginCredentials): Promise<void> {
     // TODO: substituir por chamada HTTP
     // return this.http.post<User>('/api/auth/login', credentials)
@@ -19,8 +29,9 @@ export class AuthService {
         if (credentials.email && credentials.password) {
           this._currentUser.set({
             id: '1',
-            name: 'Usuário',
+            name: 'Amanda',
             email: credentials.email,
+            username: 'frutinha',
           });
           resolve();
         } else {

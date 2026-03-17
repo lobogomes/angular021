@@ -10,6 +10,7 @@ import { Fluid } from 'primeng/fluid';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Card } from 'primeng/card';
 import { Tooltip } from 'primeng/tooltip';
+import { PrimengTouchedDirective } from '@shared/directives/primeng-touched.directive';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ import { Tooltip } from 'primeng/tooltip';
     FloatLabel,
     Card,
     Tooltip,
+    PrimengTouchedDirective,
   ],
   // use On.Push, see https://angular.dev/
   changeDetection: ChangeDetectionStrategy.OnPush,

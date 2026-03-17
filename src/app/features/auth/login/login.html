@@ -1,41 +1,39 @@
 <div class="min-h-screen flex items-center bg-primary-100 justify-center">
   <div class="w-full max-w-sm px-4">
     <p-card>
-      <div class="flex flex-col">
-        <p-fluid>
-          <h1 class="text-3xl font-bold">oi,</h1>
-          <form (submit)="onSubmit($event)" class="w-full flex flex-col gap-8">
-            <p-float-label>
-              <input
-                [formField]="form.email"
-                [pTooltip]="form.email().errors()[0]?.message"
-                [tooltipDisabled]="!form.email().touched() || form.email().valid()"
-                id="username"
-                pInputText
-                tooltipEvent="focus"
-                tooltipPosition="right"
-              />
-              <label for="username">Usuário</label>
-            </p-float-label>
+      <p-fluid class="gap-8 flex flex-col items-center">
+        <h1 class="text-3xl font-bold">hey, you <3</h1>
+        <form (submit)="onSubmit($event)" class="w-full flex flex-col gap-8">
+          <p-float-label>
+            <input
+              [formField]="form.email"
+              [pTooltip]="form.email().errors()[0]?.message"
+              [tooltipDisabled]="!form.email().touched() || form.email().valid()"
+              id="username"
+              pInputText
+              tooltipEvent="focus"
+              tooltipPosition="bottom"
+            />
+            <label for="username">Usuário</label>
+          </p-float-label>
 
-            <p-float-label>
-              <input
-                [formField]="form.password"
-                [pTooltip]="form.password().errors()[0]?.message"
-                [tooltipDisabled]="form.password().valid()"
-                id="password"
-                pInputText
-                tooltipEvent="focus"
-                tooltipPosition="bottom"
-                type="password"
-              />
-              <label for="password">Senha</label>
-            </p-float-label>
+          <p-float-label>
+            <input
+              [formField]="form.password"
+              [pTooltip]="form.password().errors()[0]?.message"
+              [tooltipDisabled]="form.password().valid()"
+              id="password"
+              pInputText
+              tooltipEvent="focus"
+              tooltipPosition="bottom"
+              type="password"
+            />
+            <label for="password">Senha</label>
+          </p-float-label>
 
-            <p-button [disabled]="form().invalid()" label="Entrar" type="submit" />
-          </form>
-        </p-fluid>
-      </div>
+          <p-button [disabled]="form().invalid()" label="Entrar" type="submit" />
+        </form>
+      </p-fluid>
     </p-card>
   </div>
 </div>
