@@ -2,8 +2,28 @@
 @import "tailwindcss-primeui";
 @layer tailwind-base, primeng, tailwind-utilities;
 
-body {
-  font-family: 'DM Sans', sans-serif;
+@layer base {
+  html {
+    font-size: 15px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  *,
+  *::before,
+  *::after {
+    min-width: 0;
+  }
 }
 
 @custom-variant dark ('.dark-theme');

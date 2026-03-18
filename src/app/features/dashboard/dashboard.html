@@ -1,58 +1,103 @@
-<div class="flex h-screen bg-surface-100">
+<div class="flex h-screen bg-surface-300">
 
-  <aside class="w-64 flex flex-col bg-surface-0  ">
+  <!-- Backdrop mobile -->
+  @if (isMobile() && sidebarOpen()) {
+    <div
+      class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+      (click)="sidebarOpen.set(false)"
+    ></div>
+  }
 
-    <div class="px-6 py-5  ">
-      <span class="text-xl font-bold text-primary-700">blablabla</span>
+  <aside [class]="asideClass()">
+
+    <div class="h-14 flex items-center"
+         [class]="sidebarCollapsed() && !isMobile() ? 'justify-center' : 'justify-between px-4'">
+      @if (!sidebarCollapsed() || isMobile()) {
+        <span class="text-lg font-bold text-primary-700 whitespace-nowrap">blablabla</span>
+      }
+      @if (isMobile()) {
+        <p-button
+          (onClick)="sidebarOpen.set(false)"
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          severity="secondary"
+          size="small"
+        />
+      } @else {
+        <p-button
+          (onClick)="sidebarCollapsed.update(v => !v)"
+          [icon]="sidebarCollapsed() ? 'pi pi-chevron-right' : 'pi pi-chevron-left'"
+          [rounded]="true"
+          [text]="true"
+          severity="secondary"
+          size="small"
+          [pTooltip]="sidebarCollapsed() ? 'Expandir menu' : ''"
+          tooltipPosition="right"
+        />
+      }
     </div>
 
-    <!--    mudar para primeng e toggle-->
-    <nav class="flex-1 px-3 py-4 flex flex-col gap-1">
+    <nav class="flex-1 px-2 py-3 flex flex-col gap-0.5">
       @for (item of navItems; track item.route) {
         <a
           [routerLink]="item.route"
-          routerLinkActive="bg-primary-100 text-primary-700  dark:bg-primary-950 font-medium"
+          routerLinkActive="bg-surface-100 font-medium"
+          [pTooltip]="sidebarCollapsed() && !isMobile() ? item.label : ''"
+          tooltipPosition="right"
+          (click)="isMobile() && sidebarOpen.set(false)"
           class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-surface-700
                  hover:bg-surface-100 transition-colors cursor-pointer"
+          [class]="sidebarCollapsed() && !isMobile() ? 'justify-center' : ''"
         >
-          <i [class]="item.icon + ' text-base'"></i>
-          <span class="text-sm">{{ item.label }}</span>
+          <i [class]="item.icon + ' text-sm shrink-0'"></i>
+          @if (!sidebarCollapsed() || isMobile()) {
+            <span class="text-sm whitespace-nowrap">{{ item.label }}</span>
+          }
         </a>
       }
     </nav>
 
-    <div class="px-4 py-4 border-t border-surface-200">
+    <div class="px-3 py-3 border-t border-surface-400">
       @if (user(); as u) {
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3"
+             [class]="sidebarCollapsed() && !isMobile() ? 'justify-center' : ''">
           <p-avatar
             [label]="userInitials(u)"
             shape="circle"
-            class="shrink-0 bg-primary-200 text-primary-800 font-semibold text-sm"
+            [pTooltip]="sidebarCollapsed() && !isMobile() ? u.name : ''"
+            tooltipPosition="right"
+            class="shrink-0"
           />
-          <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-surface-900 truncate">{{ u.name }}</p>
-            <p class="text-xs text-surface-500 truncate">&#64;{{ u.username }}</p>
-          </div>
-          <!--          corrigir cor do icone e botao -->
-          <p-button
-            icon="pi pi-sign-out"
-            [rounded]="true"
-            [text]="true"
-            class="text-black"
-            size="small"
-            pTooltip="Sair"
-            tooltipPosition="top"
-            (onClick)="logout()"
-          />
+          @if (!sidebarCollapsed() || isMobile()) {
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-surface-900 truncate">{{ u.name }}</p>
+              <p class="text-xs text-surface-500 truncate">&#64;{{ u.username }}</p>
+            </div>
+            <p-button
+              icon="pi pi-sign-out"
+              [rounded]="true"
+              [text]="true"
+              severity="secondary"
+              size="small"
+              pTooltip="Sair"
+              tooltipPosition="top"
+              (onClick)="logout()"
+            />
+          }
         </div>
       } @else {
-        <div class="flex items-center gap-3">
-          <p-skeleton shape="circle" size="2.5rem" class="shrink-0" />
-          <div class="flex-1 flex flex-col gap-1.5">
-            <p-skeleton height="0.875rem" />
-            <p-skeleton height="0.75rem" width="70%" />
+        @if (!sidebarCollapsed() || isMobile()) {
+          <div class="flex items-center gap-3">
+            <p-skeleton shape="circle" size="2.25rem" class="shrink-0" />
+            <div class="flex-1 flex flex-col gap-1.5">
+              <p-skeleton height="0.8rem" />
+              <p-skeleton height="0.7rem" width="70%" />
+            </div>
           </div>
-        </div>
+        } @else {
+          <p-skeleton shape="circle" size="2.25rem" />
+        }
       }
     </div>
 
@@ -60,13 +105,25 @@
 
   <div class="flex-1 flex flex-col min-w-0 overflow-auto">
 
-    <header class="h-16 px-6 flex items-center justify-between border-b border-surface-200 bg-surface-0">
-      @if (user(); as u) {
-        <p class="text-surface-500 text-sm">Bem-vindo de volta, <span
-          class="font-medium text-surface-800">{{ u.name }}</span></p>
-      } @else {
-        <p-skeleton height="1rem" width="12rem" />
-      }
+    <header class="h-14 px-4 flex items-center justify-between border-b border-surface-200 bg-surface-200 shadow-sm">
+      <div class="flex items-center gap-2">
+        @if (isMobile()) {
+          <p-button
+            (onClick)="sidebarOpen.set(true)"
+            icon="pi pi-bars"
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+            size="small"
+          />
+        }
+        @if (user(); as u) {
+          <p class="text-surface-500 text-sm">Bem-vindo, <span
+            class="font-medium text-surface-800">{{ u.name }}</span></p>
+        } @else {
+          <p-skeleton height="1rem" width="10rem" />
+        }
+      </div>
 
       <p-button
         (onClick)="themeService.toggle()"
@@ -80,7 +137,7 @@
       />
     </header>
 
-    <main class="flex-1 p-6">
+    <main class="flex-1 p-4 md:p-6">
       <router-outlet />
     </main>
 
