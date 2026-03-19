@@ -1,6 +1,6 @@
 <div class="flex h-screen bg-surface-300">
 
-  <!-- Backdrop mobile -->
+  <!-- backdrop mobile -->
   @if (isMobile() && sidebarOpen()) {
     <div
       class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
@@ -8,7 +8,7 @@
     ></div>
   }
 
-  <aside [class]="asideClass()">
+  <aside [pClass]="asideClass()">
 
     <div class="h-14 flex items-center"
          [class]="sidebarCollapsed() && !isMobile() ? 'justify-center' : 'justify-between px-4'">

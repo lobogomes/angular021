@@ -25,5 +25,3 @@
     min-width: 0;
   }
 }
-
-@custom-variant dark ('.dark-theme');
