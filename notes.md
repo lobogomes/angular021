@@ -143,6 +143,7 @@ should only be used when customizing a specific component
 - Signal Forms
 - Signals
 - Angular Aria (acessibility)
+- Angular Internationalization (i18n)
 - Reactive data fetching with httpResource
 - Deferrable Views
 - Unhandled errors

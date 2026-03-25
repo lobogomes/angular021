@@ -1,8 +1,8 @@
-import { definePreset } from '@primeuix/themes';
+import {definePreset} from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
 
 /**
- * AppPreset — tema quente e elegante baseado na paleta da marca:
+ * AppPreset — tema quente baseado na paleta da marca:
  *
  *   #FAEBD7  Antique White  → brand.100
  *   #C19A6B  Camel          → brand.400
@@ -307,7 +307,7 @@ export const AppPreset = definePreset(Aura, {
         roundedBorderRadius: '2rem',
         paddingX: '1.25rem',
         paddingY: '0.625rem',
-        label: { fontWeight: '600' },
+        label: {fontWeight: '600'},
 
         primary: {
           background: '{primary.600}',
@@ -319,7 +319,7 @@ export const AppPreset = definePreset(Aura, {
           color: '#ffffff',
           hoverColor: '#ffffff',
           activeColor: '#ffffff',
-          focusRing: { color: '{primary.600}', shadow: 'none' },
+          focusRing: {color: '{primary.600}', shadow: 'none'},
         },
 
         secondary: {

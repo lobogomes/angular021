@@ -18,6 +18,8 @@
     }
   </div>
 
+  <h3 class="text-surface-700 font-semibold text-sm">{{ layoutService.pageTitle() }}</h3>
+
   <p-button
     (onClick)="themeService.toggle()"
     [icon]="themeService.dark() ? 'pi pi-sun' : 'pi pi-moon'"
