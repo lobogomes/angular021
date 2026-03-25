@@ -4,7 +4,7 @@ export const TASKS_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () => import('@features/tasks/tasks').then((m) => m.TasksComponent),
-    title: 'Tasks',
+    title: 'Tarefas',
     children: []
   }
 
