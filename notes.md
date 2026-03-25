@@ -135,3 +135,17 @@ Best Practices
 Use primitive tokens when defining the core color palette and semantic tokens to specify
 the common design elements such as focus ring, primary colors and surfaces. Components tokens
 should only be used when customizing a specific component
+
+--- 
+
+**angular 21 features**
+
+- Signal Forms
+- Signals
+- Angular Aria (acessibility)
+- Reactive data fetching with httpResource
+- Deferrable Views
+- Unhandled errors
+- Dependency injection
+- Route-level providers for dependency injection
+- Route transition animations

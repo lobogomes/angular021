@@ -1,0 +1,31 @@
+<header class="h-14 px-4 flex items-center justify-between border-b border-surface-200 bg-surface-200 shadow-sm">
+  <div class="flex items-center gap-2">
+    @if (layoutService.isMobile()) {
+      <p-button
+        (onClick)="layoutService.toggleSidebar(true)"
+        [rounded]="true"
+        [text]="true"
+        icon="pi pi-bars"
+        severity="secondary"
+        size="small"
+      />
+    }
+    @if (authService.user(); as user) {
+      <p class="text-surface-500 text-sm">Bem-vindo, <span
+        class="font-medium text-surface-800">{{ user.name }}</span></p>
+    } @else {
+      <p-skeleton height="1rem" width="10rem"/>
+    }
+  </div>
+
+  <p-button
+    (onClick)="themeService.toggle()"
+    [icon]="themeService.dark() ? 'pi pi-sun' : 'pi pi-moon'"
+    [pTooltip]="themeService.dark() ? 'Modo claro' : 'Modo escuro'"
+    [rounded]="true"
+    [text]="true"
+    severity="secondary"
+    size="small"
+    tooltipPosition="left"
+  />
+</header>
